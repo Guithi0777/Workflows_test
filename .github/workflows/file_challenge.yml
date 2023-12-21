@@ -9,10 +9,7 @@ jobs:
   mon-test:
     runs-on: ubuntu-latest
     steps:
-    - name: install cowsay
-      uses: mscoutermarsh/cowsays-action@master
-      with:
-        text: ${{ env.ISSUE_COMMENT }}
-        color: "blue"
-      env:
-        ISSUE_COMMENT: ${{ github.event.comment.body }}
+      - name: Installer cowsay
+        uses: mscoutermarsh/cowsays-action@v1
+        with:
+          text: "Careful pardner! Issue ${{ github.event.issue.number }} has been opened !"
