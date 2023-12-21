@@ -5,35 +5,35 @@ on:
     - main
 jobs:
   jobs1:
-     runs-on: ubuntu-latest
-     needs: [jobs1]
-     steps:
-     - uses: actions/checkout@v4
-     - name: Install Requirement Python
-       uses: actions/setup-python@v5
-       with:
-       python-version: 3.11
+    runs-on: ubuntu-latest
+    needs: [jobs1]
     steps:
+    - uses: actions/checkout@v4
+    - name: Install Requirement Python
+    uses: actions/setup-python@v5
+    with:
+      python-version: 3.11
+      steps:
       -run: pip install -r requirements.txt
   jobs2:
     if: github.repository == 'Guithi0777/github_actions'
     needs: [jobs1, jobs2]
     runs-on: ubuntu-latest
     steps:
-      with:
-      python-version: 3.11
-      uses: actions/checkout@v4
-      name: Execute launchingjob1.py   
+    with:
+    python-version: 3.11
+    uses: actions/checkout@v4
+    name: Execute launchingjob1.py
   jobs3:
     needs: [jobs1, jobs2, jobs3]
     runs-on: ubuntu-latest
     steps:
-      with:
-      python-version: 3.11
-      uses: actions/checkout@v4
-      name: Execute launchingjob1/ Password execution
-      steps:
-      - run: python launchingjob1.py  
+    with:
+    python-version: 3.11
+    uses: actions/checkout@v4
+    name: Execute launchingjob1/ Password execution
+  steps:
+  - run: python launchingjob1.py
   jobs4:
     runs-on: ubuntu-latest
     steps:
@@ -54,16 +54,18 @@ jobs:
       with:
         python-version: 3.11
     - name: Checkout totally my work !
-      uses: actions/github-script@v7    
+      uses: actions/github-script@v7
       with:
         script: |
           echo(" Bravo !")
     - name: Check previous jobs
-    if:
+      if:
       - ${{ needs.jobs1.result == 'success' }}
       - ${{ needs.jobs2.result == 'success' }}
       - ${{ needs.jobs3.result == 'success' }}
       - ${{ needs.jobs4.result == 'success' }}
-    run: echo "All jobs succeeded"
+      run: echo "All jobs succeeded"
+    else:
+      run: echo "One or more jobs failed, recommence ton workflow"
     else:
     run: echo "One or more jobs failed, recommence ton workflow"
