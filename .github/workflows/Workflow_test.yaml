@@ -65,7 +65,7 @@ jobs:
       - ${{ needs.jobs3.result == 'success' }}
       - ${{ needs.jobs4.result == 'success' }}
       run: echo "All jobs succeeded"
-    else:
-      run: echo "One or more jobs failed, recommence ton workflow"
+      else:
+    run: echo "One or more jobs failed, recommence ton workflow"
     else:
     run: echo "One or more jobs failed, recommence ton workflow"
